@@ -3,6 +3,7 @@ import React from 'react'
 import styled from 'styled-components'
 import {IoLibrary} from 'react-icons/io5'
 import {MdHomeFilled, MdSearch} from'react-icons/md'
+import Playlists from './Playlists'
 
 function Sidebar() {
   return (
@@ -29,6 +30,7 @@ function Sidebar() {
           </li>
         </ul>
       </div>
+      <Playlists />
     </Container>
   )
 }
