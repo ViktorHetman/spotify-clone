@@ -7,7 +7,7 @@ import styled from 'styled-components'
 import reducerCases from '../utils/Constants'
 import { useStateProvider } from '../utils/StateProvider'
 
-function Body() {
+function Body({headerBackground}) {
   const [{ token, selectedPlaylistId, selectedPlaylist }, dispatch] = useStateProvider()
 
   useEffect(() => {
@@ -44,8 +44,14 @@ function Body() {
     getInitialPlaylist()
   }, [token, dispatch, selectedPlaylistId])
 
+  const converterToMinutes = (ms) => {
+    const minutes = Math.floor(ms/60000)
+    const seconds = ((ms%60000)/1000).toFixed(0)
+    return minutes + ':' + (seconds <10 ? "0" : "") + seconds
+  }
+
   return (
-    <Container>
+    <Container headerBackground={headerBackground}>
       {
         selectedPlaylist && (
           <>
@@ -94,7 +100,7 @@ function Body() {
                           <span>{album}</span>
                         </div>
                         <div className="col">
-                          <span>{duration}</span>
+                          <span>{converterToMinutes(duration)}</span>
                         </div>
                       </div>
                     )
@@ -117,7 +123,61 @@ const Container = styled.div`
     .image {
       img {
         height: 240px;
-        color: white;
+        box-shadow: rgba(0,0,0, 0.25) 0px 25px 50px -12px;
+      }
+    }
+    .details {
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+      color: #e0dede;
+      .title {
+        color: #fff;
+        font-size: 64px;
+      }
+    }
+  }
+  .list {
+    .header_row {
+      display: grid;
+      grid-template-columns: 0.3fr 3fr 2fr 0.1fr;
+      color: #dddcdc;
+      margin: 16px 0 0;
+      position: sticky;
+      top: 15vh;
+      padding: 16px 48px;
+      transition: 0.3s ease-in-out;
+      background-color: ${({ headerBackground }) =>
+      headerBackground ? '#0000dc' : 'none'};
+    }
+    .tracks {
+      margin: 0 32px;
+      display: flex;
+      flex-direction: column;
+      margin-bottom: 110px;
+      .row  {
+        padding: 8px 16px;
+        display: grid;
+        grid-template-columns: 0.3fr 3.1fr 1.9fr 0.1fr;
+        &:hover {
+          background-color: rgba(0,0,0,0.7)
+        }
+      }
+      .col {
+        display: flex;
+        align-items: center;
+        color: #dddcdc;
+        img {
+          height: 40px;
+        }
+      }
+      .detail {
+        display: flex;
+        gap: 16px;
+        .info {
+          display: flex;
+          flex-direction: column;
+        }
       }
     }
   }

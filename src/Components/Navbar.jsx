@@ -1,15 +1,15 @@
 import React from 'react'
-import {FaSearch} from 'react-icons/fa'
-import {CgProfile} from 'react-icons/cg'
+import { FaSearch } from 'react-icons/fa'
+import { CgProfile } from 'react-icons/cg'
 
 import styled from 'styled-components'
 import { useStateProvider } from '../utils/StateProvider'
 
-function Navbar() {
-  const [{userInfo}] = useStateProvider()
+function Navbar({ navBackground }) {
+  const [{ userInfo }] = useStateProvider()
 
   return (
-    <Container>
+    <Container navBackground={navBackground}>
       <div className="search_bar">
         <FaSearch />
         <input type="text" placeholder="Artists, songs, or podcasts" />
@@ -25,31 +25,32 @@ function Navbar() {
 }
 
 const Container = styled.div`
- display: flex;
- justify-content: space-between;
- align-items: center;
- padding: 48px;
- height: 5vh;
- position: sticky;
- top: 0;
- transition: 0.3s ease-in-out;
- background-color: none;
- .search_bar {
-   background-color: white;
-   width: 30%;
-   padding: 7px 24px;
-   border-radius: 48px;
-   display: flex;
-   align-items: center;
-   gap: 12px;
-   input {
-    border: none;
-    height: 48px;
-    width: 100%;
-    &:focus {
-      outline: none;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 48px;
+  height: 5vh;
+  position: sticky;
+  top: 0;
+  transition: 0.3s ease-in-out;
+  background-color: ${({ navBackground }) =>
+    navBackground ? 'rgba(0,0,0,0.7)' : 'none'};
+  .search_bar {
+    background-color: white;
+    width: 30%;
+    padding: 7px 24px;
+    border-radius: 48px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    input {
+      border: none;
+      height: 48px;
+      width: 100%;
+      &:focus {
+        outline: none;
+      }
     }
-   }
   }
   .avatar {
     background-color: black;
@@ -75,7 +76,7 @@ const Container = styled.div`
         color: #c7c5c5;
       }
     }
-   }
+  }
 `
 
 export default Navbar
