@@ -50,9 +50,9 @@ ul {
   max-height: 100%;
   overflow: auto;
   &::-webkit-scrollbar {
-    width: 0 11px;
+    width: 11px;
     &-thumb {
-      background-color: rgba(255, 255, 255 , 0.6)
+      background-color: rgba(255, 255, 255 , 0.6);
     }
   }
   li {
