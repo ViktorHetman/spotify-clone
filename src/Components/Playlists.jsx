@@ -8,7 +8,7 @@ import styled from 'styled-components'
 function Playlists() {
   const [{ token, playlists }, dispatch] = useStateProvider()
   useEffect(() => {
-    const getPlaylist = async () => {
+    const getPlaylistData = async () => {
       const response = await axios.get(
         'https://api.spotify.com/v1/me/playlists',
         {
@@ -24,7 +24,7 @@ function Playlists() {
       })
       dispatch({ type: reducerCases.SET_PLAYLISTS, playlists })
     }
-    getPlaylist()
+    getPlaylistData()
   }, [token, dispatch])
   return (
     <Container>

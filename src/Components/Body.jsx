@@ -158,7 +158,7 @@ const Container = styled.div`
       .row  {
         padding: 8px 16px;
         display: grid;
-        grid-template-columns: 0.3fr 3.1fr 1.9fr 0.1fr;
+        grid-template-columns: 0.3fr 3.1fr 2fr 0.1fr;
         &:hover {
           background-color: rgba(0,0,0,0.7)
         }
