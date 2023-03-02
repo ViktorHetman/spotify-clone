@@ -44,7 +44,7 @@ function CurrentTrack() {
             </div>
             <div className="track_info">
               <h4>{currentlyPlaying.name}</h4>
-              <p>{currentlyPlaying.artists.join(', ')}</p>
+              <p>{currentlyPlaying.artists.join(", ")}</p>
             </div>
           </div>
         )

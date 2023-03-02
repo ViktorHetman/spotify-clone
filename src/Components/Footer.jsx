@@ -2,11 +2,13 @@ import styled from 'styled-components'
 import React from 'react'
 
 import CurrentTrack from './CurrentTrack'
+import PlayerControls from './PlayerControls'
 
 function Footer() {
   return (
     <Container>
       <CurrentTrack/>
+      <PlayerControls />
     </Container>
   )
 }
