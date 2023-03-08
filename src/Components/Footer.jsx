@@ -3,12 +3,14 @@ import React from 'react'
 
 import CurrentTrack from './CurrentTrack'
 import PlayerControls from './PlayerControls'
+import VolumeController from './VolumeController'
 
 function Footer() {
   return (
     <Container>
       <CurrentTrack/>
       <PlayerControls />
+      <VolumeController />
     </Container>
   )
 }
