@@ -4,7 +4,7 @@ import styled from 'styled-components'
 
 export default function Login() {
   const handleClick = () => {
-    const cliendId = '62e3f84f9fa141d1ac886f90cca1aa0d'
+    const cliendId = 'aad67db467e943a1b4b7560bb070e6e9'
     const redirectUrl = 'http://localhost:3000/'
     const apiUrl = 'https://accounts.spotify.com/authorize'
     const scope = [
@@ -55,3 +55,4 @@ const Container = styled.div`
     cursor: pointer;
   }
 `
+//62e3f84f9fa141d1ac886f90cca1aa0d

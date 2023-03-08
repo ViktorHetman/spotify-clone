@@ -8,7 +8,7 @@ import reducerCases from '../utils/Constants'
 import { useStateProvider } from '../utils/StateProvider'
 
 function Body({headerBackground}) {
-  const [{ token, selectedPlaylistId, selectedPlaylist }, dispatch] = useStateProvider()
+  const [{ token, selectedPlaylistId, selectedPlaylist, trackFilter }, dispatch] = useStateProvider()
 
   useEffect(() => {
     const getInitialPlaylist = async () => {
@@ -81,7 +81,7 @@ function Body({headerBackground}) {
                 </div>
               </div>
               <div className="tracks">
-                {selectedPlaylist.tracks.map(({id, name, artists, image, duration, album, context_uri, track_number}, index) => {
+                {selectedPlaylist.tracks.filter((track)=> track.name.toLowerCase().includes(trackFilter)).map(({id, name, artists, image, duration, album, context_uri, track_number}, index) => {
                     return (
                       <div className="row" key={id}>
                         <div className="col">

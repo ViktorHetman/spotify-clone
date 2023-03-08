@@ -4,15 +4,26 @@ import { CgProfile } from 'react-icons/cg'
 
 import styled from 'styled-components'
 import { useStateProvider } from '../utils/StateProvider'
+import reducerCases from '../utils/Constants'
 
 function Navbar({ navBackground }) {
-  const [{ userInfo }] = useStateProvider()
+  const [{ userInfo,trackFilter }, dispatch] = useStateProvider()
+
+  const filterTrackHandler = (value) => {
+    const trackFilter = value
+    dispatch({ type: reducerCases.SET_FILTERED_TRACKS, trackFilter })
+  }
 
   return (
     <Container navBackground={navBackground}>
       <div className="search_bar">
         <FaSearch />
-        <input type="text" placeholder="Artists, songs, or podcasts" />
+        <input
+          type="text"
+          placeholder="Artists, songs, or podcasts"
+          onChange={(e) => filterTrackHandler(e.target.value)}
+          value={trackFilter}
+        />
       </div>
       <div className="avatar">
         <a href="#">

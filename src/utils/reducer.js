@@ -4,10 +4,11 @@ export const initialState = {
   token: null,
   playlists: [],
   userInfo: null,
-  selectedPlaylistId: '67sHQtYM86XgsGh6sbhDZ8',
+  selectedPlaylistId: '',
   selectedPlaylist: null,
   currentlyPlaying: null,
-  playerState: false
+  playerState: false,
+  trackFilter: ''
 }
 
 const reducer = (state,action) => {
@@ -46,6 +47,18 @@ const reducer = (state,action) => {
       return {
         ...state,
         playerState: action.playerState
+      }
+    }
+    case reducerCases.SET_PLAYLIST_ID: {
+      return {
+        ...state,
+        selectedPlaylistId: action.selectedPlaylistId
+      }
+    }
+    case reducerCases.SET_FILTERED_TRACKS: {
+      return {
+        ...state,
+        trackFilter: action.trackFilter
       }
     }
     default:
