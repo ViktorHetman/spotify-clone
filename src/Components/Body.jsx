@@ -55,7 +55,7 @@ function Body({ headerBackground }) {
       {
         context_uri,
         offset: {
-          possition: track_number - 1,
+          position: track_number - 1,
         },
         possition_ms: 0,
       },
@@ -66,7 +66,7 @@ function Body({ headerBackground }) {
         },
       }
     );
-    if (response.status === 204) {
+    if (204) {
       const currentlyPlaying = {
         id,
         name,
@@ -76,7 +76,7 @@ function Body({ headerBackground }) {
       dispatch({ type: reducerCases.SET_PLAYING, currentlyPlaying });
       dispatch({ type: reducerCases.SET_PLAYER_STATE, playerState: true });
     } else {
-      dispatch({ type: reducerCases.SET_PLAYER_STATE, playerState: false });
+      dispatch({ type: reducerCases.SET_PLAYER_STATE, playerState: true });
     }
   };
 
