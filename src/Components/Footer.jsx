@@ -1,18 +1,18 @@
-import styled from 'styled-components'
-import React from 'react'
+import styled from 'styled-components';
+import React from 'react';
 
-import CurrentTrack from './CurrentTrack'
-import PlayerControls from './PlayerControls'
-import VolumeController from './VolumeController'
+import CurrentTrack from './CurrentTrack';
+import PlayerControls from './PlayerControls';
+import VolumeController from './VolumeController';
 
 function Footer() {
   return (
     <Container>
-      <CurrentTrack/>
+      <CurrentTrack />
       <PlayerControls />
       <VolumeController />
     </Container>
-  )
+  );
 }
 
 const Container = styled.div`
@@ -23,8 +23,8 @@ const Container = styled.div`
   display: grid;
   grid-template-columns: 1fr 2fr 1fr;
   align-items: center;
-  justify-content: center; 
+  justify-content: center;
   padding: 0 16px;
-`
+`;
 
-export default Footer
+export default Footer;

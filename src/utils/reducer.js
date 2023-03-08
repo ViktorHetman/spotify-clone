@@ -1,4 +1,4 @@
-import reducerCases from './Constants'
+import reducerCases from './Constants';
 
 export const initialState = {
   token: null,
@@ -8,62 +8,62 @@ export const initialState = {
   selectedPlaylist: null,
   currentlyPlaying: null,
   playerState: false,
-  trackFilter: ''
-}
+  trackFilter: '',
+};
 
-const reducer = (state,action) => {
-  switch(action.type) {
-  case reducerCases.SET_TOKEN: {
-    return {
-      ...state, 
-      token:action.token
+const reducer = (state, action) => {
+  switch (action.type) {
+    case reducerCases.SET_TOKEN: {
+      return {
+        ...state,
+        token: action.token,
+      };
     }
-  }
-  case reducerCases.SET_PLAYLISTS: {
-    return {
-      ...state,
-        playlists: action.playlists 
-      }
+    case reducerCases.SET_PLAYLISTS: {
+      return {
+        ...state,
+        playlists: action.playlists,
+      };
     }
     case reducerCases.SET_USER: {
       return {
         ...state,
-        userInfo: action.userInfo
-      }
+        userInfo: action.userInfo,
+      };
     }
     case reducerCases.SET_PLAYLIST: {
       return {
         ...state,
-        selectedPlaylist: action.selectedPlaylist
-      }
+        selectedPlaylist: action.selectedPlaylist,
+      };
     }
     case reducerCases.SET_PLAYING: {
       return {
         ...state,
-        currentlyPlaying: action.currentlyPlaying
-      }
+        currentlyPlaying: action.currentlyPlaying,
+      };
     }
     case reducerCases.SET_PLAYER_STATE: {
       return {
         ...state,
-        playerState: action.playerState
-      }
+        playerState: action.playerState,
+      };
     }
     case reducerCases.SET_PLAYLIST_ID: {
       return {
         ...state,
-        selectedPlaylistId: action.selectedPlaylistId
-      }
+        selectedPlaylistId: action.selectedPlaylistId,
+      };
     }
     case reducerCases.SET_FILTERED_TRACKS: {
       return {
         ...state,
-        trackFilter: action.trackFilter
-      }
+        trackFilter: action.trackFilter,
+      };
     }
     default:
-      return state
+      return state;
   }
-}
+};
 
-export default reducer
+export default reducer;

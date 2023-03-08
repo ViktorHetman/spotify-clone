@@ -6,7 +6,7 @@ const reducerCases = {
   SET_PLAYING: 'SET_PLAYING',
   SET_PLAYER_STATE: 'SET_PLAYER_STATE',
   SET_PLAYLIST_ID: 'SET_PLAYLIST_ID',
-  SET_FILTERED_TRACKS: 'SET_FILTERED_TRACKS'
-}
+  SET_FILTERED_TRACKS: 'SET_FILTERED_TRACKS',
+};
 
-export default reducerCases
+export default reducerCases;

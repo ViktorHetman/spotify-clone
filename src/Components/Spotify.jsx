@@ -1,29 +1,25 @@
-import axios from 'axios'
-import React, { useEffect, useRef, useState } from 'react'
+import axios from 'axios';
+import React, { useEffect, useRef, useState } from 'react';
 
-import styled from 'styled-components'
-import reducerCases from '../utils/Constants'
-import { useStateProvider } from '../utils/StateProvider'
-import Body from './Body'
-import Footer from './Footer'
-import Navbar from './Navbar'
-import Sidebar from './Sidebar'
+import styled from 'styled-components';
+import reducerCases from '../utils/Constants';
+import { useStateProvider } from '../utils/StateProvider';
+import Body from './Body';
+import Footer from './Footer';
+import Navbar from './Navbar';
+import Sidebar from './Sidebar';
 
 function Spotify() {
-  const [{ token }, dispatch] = useStateProvider()
+  const [{ token }, dispatch] = useStateProvider();
 
-  const bodyRef = useRef()
-  const [navBackground, setNavBackground] = useState(false)
-  const [headerBackground, setHeaderBackground] = useState(false)
+  const bodyRef = useRef();
+  const [navBackground, setNavBackground] = useState(false);
+  const [headerBackground, setHeaderBackground] = useState(false);
 
   const bodyScrolled = () => {
-    bodyRef.current.scrollTop >= 30
-      ? setNavBackground(true)
-      : setNavBackground(false)
-      bodyRef.current.scrollTop >= 268
-      ? setHeaderBackground(true)
-      : setHeaderBackground(false)
-  }
+    bodyRef.current.scrollTop >= 30 ? setNavBackground(true) : setNavBackground(false);
+    bodyRef.current.scrollTop >= 268 ? setHeaderBackground(true) : setHeaderBackground(false);
+  };
 
   useEffect(() => {
     const getUserInfo = async () => {
@@ -32,24 +28,24 @@ function Spotify() {
           Authorization: 'Bearer ' + token,
           'Content-Type': 'application/json',
         },
-      })
+      });
       const userInfo = {
         userId: data.id,
         userName: data.display_name,
-      }
-      dispatch({ type: reducerCases.SET_USER, userInfo })
-    }
-    getUserInfo()
-  }, [dispatch, token])
+      };
+      dispatch({ type: reducerCases.SET_USER, userInfo });
+    };
+    getUserInfo();
+  }, [dispatch, token]);
 
   return (
     <Container>
       <div className="spotify_body">
         <Sidebar />
         <div className="body" ref={bodyRef} onScroll={bodyScrolled}>
-          <Navbar navBackground={navBackground}/>
+          <Navbar navBackground={navBackground} />
           <div className="body_content">
-            <Body headerBackground={headerBackground}/>
+            <Body headerBackground={headerBackground} />
           </div>
         </div>
       </div>
@@ -57,7 +53,7 @@ function Spotify() {
         <Footer />
       </div>
     </Container>
-  )
+  );
 }
 
 const Container = styled.div`
@@ -84,6 +80,6 @@ const Container = styled.div`
       }
     }
   }
-`
+`;
 
-export default Spotify
+export default Spotify;

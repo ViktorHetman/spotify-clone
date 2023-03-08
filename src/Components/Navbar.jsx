@@ -1,18 +1,18 @@
-import React from 'react'
-import { FaSearch } from 'react-icons/fa'
-import { CgProfile } from 'react-icons/cg'
+import React from 'react';
+import { FaSearch } from 'react-icons/fa';
+import { CgProfile } from 'react-icons/cg';
 
-import styled from 'styled-components'
-import { useStateProvider } from '../utils/StateProvider'
-import reducerCases from '../utils/Constants'
+import styled from 'styled-components';
+import { useStateProvider } from '../utils/StateProvider';
+import reducerCases from '../utils/Constants';
 
 function Navbar({ navBackground }) {
-  const [{ userInfo,trackFilter }, dispatch] = useStateProvider()
+  const [{ userInfo, trackFilter }, dispatch] = useStateProvider();
 
   const filterTrackHandler = (value) => {
-    const trackFilter = value
-    dispatch({ type: reducerCases.SET_FILTERED_TRACKS, trackFilter })
-  }
+    const trackFilter = value;
+    dispatch({ type: reducerCases.SET_FILTERED_TRACKS, trackFilter });
+  };
 
   return (
     <Container navBackground={navBackground}>
@@ -32,7 +32,7 @@ function Navbar({ navBackground }) {
         </a>
       </div>
     </Container>
-  )
+  );
 }
 
 const Container = styled.div`
@@ -44,8 +44,7 @@ const Container = styled.div`
   position: sticky;
   top: 0;
   transition: 0.3s ease-in-out;
-  background-color: ${({ navBackground }) =>
-    navBackground ? 'rgba(0,0,0,0.7)' : 'none'};
+  background-color: ${({ navBackground }) => (navBackground ? 'rgba(0,0,0,0.7)' : 'none')};
   .search_bar {
     background-color: white;
     width: 30%;
@@ -88,6 +87,6 @@ const Container = styled.div`
       }
     }
   }
-`
+`;
 
-export default Navbar
+export default Navbar;

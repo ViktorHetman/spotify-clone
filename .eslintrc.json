@@ -9,7 +9,6 @@
         "plugin:import/errors",
         "plugin:import/warnings",
         "google",
-        "plugin:prettier/recommend",
         "prettier",
         "prettier/react"
     ],

@@ -1,12 +1,12 @@
-import React from 'react'
+import React from 'react';
 
-import styled from 'styled-components'
+import styled from 'styled-components';
 
 export default function Login() {
   const handleClick = () => {
-    const cliendId = 'aad67db467e943a1b4b7560bb070e6e9'
-    const redirectUrl = 'http://localhost:3000/'
-    const apiUrl = 'https://accounts.spotify.com/authorize'
+    const cliendId = 'aad67db467e943a1b4b7560bb070e6e9';
+    const redirectUrl = 'http://localhost:3000/';
+    const apiUrl = 'https://accounts.spotify.com/authorize';
     const scope = [
       'user-read-email',
       'user-read-private',
@@ -16,11 +16,11 @@ export default function Login() {
       'user-read-playback-position',
       'user-top-read',
       'user-read-recently-played',
-    ]
+    ];
     window.location.href = `${apiUrl}?client_id=${cliendId}&redirect_uri=${redirectUrl}&scope=${scope.join(
       ' '
-    )}&response_type=token&show_dialog=true`
-  }
+    )}&response_type=token&show_dialog=true`;
+  };
 
   return (
     <Container>
@@ -30,7 +30,7 @@ export default function Login() {
       />
       <button onClick={handleClick}>Connect Spotify</button>
     </Container>
-  )
+  );
 }
 
 const Container = styled.div`
@@ -54,5 +54,5 @@ const Container = styled.div`
     font-size: 36px;
     cursor: pointer;
   }
-`
+`;
 //62e3f84f9fa141d1ac886f90cca1aa0d

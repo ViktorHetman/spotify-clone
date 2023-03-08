@@ -1,14 +1,15 @@
-import axios from 'axios'
+import axios from 'axios';
 
-import React, { useEffect } from 'react'
-import { AiFillClockCircle } from 'react-icons/ai'
+import React, { useEffect } from 'react';
+import { AiFillClockCircle } from 'react-icons/ai';
 
-import styled from 'styled-components'
-import reducerCases from '../utils/Constants'
-import { useStateProvider } from '../utils/StateProvider'
+import styled from 'styled-components';
+import reducerCases from '../utils/Constants';
+import { useStateProvider } from '../utils/StateProvider';
 
-function Body({headerBackground}) {
-  const [{ token, selectedPlaylistId, selectedPlaylist, trackFilter }, dispatch] = useStateProvider()
+function Body({ headerBackground }) {
+  const [{ token, selectedPlaylistId, selectedPlaylist, trackFilter }, dispatch] =
+    useStateProvider();
 
   useEffect(() => {
     const getInitialPlaylist = async () => {
@@ -20,15 +21,13 @@ function Body({headerBackground}) {
             'Content-Type': 'application/json',
           },
         }
-      )
+      );
       const selectedPlaylist = {
         id: response.data.id,
         name: response.data.name,
-        description: response.data.description.startsWith('<a')
-          ? ''
-          : response.data.description,
+        description: response.data.description.startsWith('<a') ? '' : response.data.description,
         image: response.data.images[0].url,
-        tracks: response.data.tracks.items.map(({track}) => ({
+        tracks: response.data.tracks.items.map(({ track }) => ({
           id: track.id,
           name: track.name,
           artists: track.artists.map((artist) => artist.name),
@@ -36,54 +35,98 @@ function Body({headerBackground}) {
           duration: track.duration_ms,
           album: track.album.name,
           context_uri: track.album.uri,
-          track_number: track.track_number
-        }))
-      }
-      dispatch({type:reducerCases.SET_PLAYLIST, selectedPlaylist})
-    }
-    getInitialPlaylist()
-  }, [token, dispatch, selectedPlaylistId])
+          track_number: track.track_number,
+        })),
+      };
+      dispatch({ type: reducerCases.SET_PLAYLIST, selectedPlaylist });
+    };
+    getInitialPlaylist();
+  }, [token, dispatch, selectedPlaylistId]);
 
   const converterToMinutes = (ms) => {
-    const minutes = Math.floor(ms/60000)
-    const seconds = ((ms%60000)/1000).toFixed(0)
-    return minutes + ':' + (seconds <10 ? "0" : "") + seconds
-  }
+    const minutes = Math.floor(ms / 60000);
+    const seconds = ((ms % 60000) / 1000).toFixed(0);
+    return minutes + ':' + (seconds < 10 ? '0' : '') + seconds;
+  };
+
+  const playTrack = async (id, name, artists, image, context_uri, track_number) => {
+    await axios.put(
+      `https://api.spotify.com/v1/me/player/play`,
+      {
+        context_uri,
+        offset: {
+          possition: track_number - 1,
+        },
+        possition_ms: 0,
+      },
+      {
+        headers: {
+          Authorization: 'Bearer ' + token,
+          'Content-Type': 'application/json',
+        },
+      }
+    );
+    if (response.status === 204) {
+      const currentlyPlaying = {
+        id,
+        name,
+        artists,
+        image,
+      };
+      dispatch({ type: reducerCases.SET_PLAYING, currentlyPlaying });
+      dispatch({ type: reducerCases.SET_PLAYER_STATE, playerState: true });
+    } else {
+      dispatch({ type: reducerCases.SET_PLAYER_STATE, playerState: false });
+    }
+  };
 
   return (
     <Container headerBackground={headerBackground}>
-      {
-        selectedPlaylist && (
-          <>
-            <div className="playlist">
-              <div className="image">
-                <img src={selectedPlaylist.image} alt="selectedPlaylistImage  "/>
+      {selectedPlaylist && (
+        <>
+          <div className="playlist">
+            <div className="image">
+              <img src={selectedPlaylist.image} alt="selectedPlaylistImage  " />
+            </div>
+            <div className="details">
+              <span className="type">PLAYLIST</span>
+              <h1 className="title">{selectedPlaylist.name}</h1>
+              <p className="description">{selectedPlaylist.description}</p>
+            </div>
+          </div>
+          <div className="list">
+            <div className="header_row">
+              <div className="col">
+                <span>#</span>
               </div>
-              <div className="details">
-                <span className="type">PLAYLIST</span>
-                <h1 className="title">{selectedPlaylist.name}</h1>
-                <p className="description">{selectedPlaylist.description}</p>
+              <div className="col">
+                <span>TITLE</span>
+              </div>
+              <div className="col">
+                <span>ALBUM</span>
+              </div>
+              <div className="col">
+                <span>
+                  <AiFillClockCircle />
+                </span>
               </div>
             </div>
-            <div className="list">
-              <div className="header_row">
-                <div className="col">
-                  <span>#</span>
-                </div>
-                <div className="col">
-                  <span>TITLE</span>
-                </div>
-                <div className="col">
-                  <span>ALBUM</span>
-                </div>
-                <div className="col">
-                  <span><AiFillClockCircle /></span>
-                </div>
-              </div>
-              <div className="tracks">
-                {selectedPlaylist.tracks.filter((track)=> track.name.toLowerCase().includes(trackFilter)).map(({id, name, artists, image, duration, album, context_uri, track_number}, index) => {
+            <div className="tracks">
+              {selectedPlaylist.tracks
+                .filter((track) => track.name.toLowerCase().includes(trackFilter))
+                .map(
+                  (
+                    { id, name, artists, image, duration, album, context_uri, track_number },
+                    index
+                  ) => {
                     return (
-                      <div className="row" key={id}>
+                      <div
+                        className="row"
+                        key={id}
+                        onClick={() =>
+                          playTrack(id, name, artists, image, context_uri, track_number)
+                        }
+                      >
                         <div className="col">
                           <span>{index + 1}</span>
                         </div>
@@ -103,15 +146,15 @@ function Body({headerBackground}) {
                           <span>{converterToMinutes(duration)}</span>
                         </div>
                       </div>
-                    )
-                })}
-              </div>
+                    );
+                  }
+                )}
             </div>
-          </>
-        )
-      }
+          </div>
+        </>
+      )}
     </Container>
-  )
+  );
 }
 
 const Container = styled.div`
@@ -123,7 +166,7 @@ const Container = styled.div`
     .image {
       img {
         height: 240px;
-        box-shadow: rgba(0,0,0, 0.25) 0px 25px 50px -12px;
+        box-shadow: rgba(0, 0, 0, 0.25) 0px 25px 50px -12px;
       }
     }
     .details {
@@ -147,20 +190,19 @@ const Container = styled.div`
       top: 15vh;
       padding: 16px 48px;
       transition: 0.3s ease-in-out;
-      background-color: ${({ headerBackground }) =>
-      headerBackground ? '#0000dc' : 'none'};
+      background-color: ${({ headerBackground }) => (headerBackground ? '#000' : 'none')};
     }
     .tracks {
       margin: 0 32px;
       display: flex;
       flex-direction: column;
       margin-bottom: 110px;
-      .row  {
+      .row {
         padding: 8px 16px;
         display: grid;
         grid-template-columns: 0.3fr 3.1fr 2fr 0.1fr;
         &:hover {
-          background-color: rgba(0,0,0,0.7)
+          background-color: rgba(0, 0, 0, 0.7);
         }
       }
       .col {
@@ -181,6 +223,6 @@ const Container = styled.div`
       }
     }
   }
-`
+`;
 
-export default Body
+export default Body;
