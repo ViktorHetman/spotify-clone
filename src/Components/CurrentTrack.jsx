@@ -3,7 +3,7 @@ import axios from 'axios';
 
 import React, { useEffect } from 'react';
 
-import { useStateProvider } from '../utils/StateProvider';
+import { useStateProvider } from '../utils/StateProvider.jsx';
 import reducerCases from '../utils/Constants';
 
 function CurrentTrack() {

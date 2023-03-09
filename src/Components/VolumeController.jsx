@@ -3,7 +3,7 @@ import axios from 'axios';
 import { BsVolumeUp } from 'react-icons/bs';
 
 import React from 'react';
-import { useStateProvider } from '../utils/StateProvider';
+import { useStateProvider } from '../utils/StateProvider.jsx';
 
 function VolumeController() {
   const [{ token }] = useStateProvider();

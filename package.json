@@ -16,7 +16,8 @@
   },
   "scripts": {
     "start": "react-scripts start",
-    "lint": "eslint --ext .js, .jsx, src --fix",
+    "lint": "eslint .",
+    "lint:fix": "eslint --fix .",
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject"
@@ -24,7 +25,7 @@
   "prettier": {
     "singleQuote": true,
     "printWidth": 100
-  }, 
+  },
   "browserslist": {
     "production": [
       ">0.2%",

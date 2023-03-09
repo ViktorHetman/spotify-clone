@@ -5,7 +5,7 @@ import { AiFillClockCircle } from 'react-icons/ai';
 
 import styled from 'styled-components';
 import reducerCases from '../utils/Constants';
-import { useStateProvider } from '../utils/StateProvider';
+import { useStateProvider } from '../utils/StateProvider.jsx';
 
 function Body({ headerBackground }) {
   const [{ token, selectedPlaylistId, selectedPlaylist, trackFilter }, dispatch] =

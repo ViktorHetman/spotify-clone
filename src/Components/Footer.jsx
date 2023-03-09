@@ -1,9 +1,9 @@
 import styled from 'styled-components';
 import React from 'react';
 
-import CurrentTrack from './CurrentTrack';
-import PlayerControls from './PlayerControls';
-import VolumeController from './VolumeController';
+import CurrentTrack from './CurrentTrack.jsx';
+import PlayerControls from './PlayerControls.jsx';
+import VolumeController from './VolumeController.jsx';
 
 function Footer() {
   return (

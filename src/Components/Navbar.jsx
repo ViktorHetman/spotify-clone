@@ -1,12 +1,12 @@
-import React from 'react';
+import React, { memo } from 'react';
 import { FaSearch } from 'react-icons/fa';
 import { CgProfile } from 'react-icons/cg';
 
 import styled from 'styled-components';
-import { useStateProvider } from '../utils/StateProvider';
+import { useStateProvider } from '../utils/StateProvider.jsx';
 import reducerCases from '../utils/Constants';
 
-function Navbar({ navBackground }) {
+React.memo(function Navbar({ navBackground }) {
   const [{ userInfo, trackFilter }, dispatch] = useStateProvider();
 
   const filterTrackHandler = (value) => {
@@ -33,7 +33,7 @@ function Navbar({ navBackground }) {
       </div>
     </Container>
   );
-}
+})
 
 const Container = styled.div`
   display: flex;

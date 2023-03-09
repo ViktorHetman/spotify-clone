@@ -5,7 +5,7 @@ import { IoLibrary } from 'react-icons/io5';
 import { MdHomeFilled, MdSearch } from 'react-icons/md';
 import Playlists from './Playlists';
 
-function Sidebar() {
+React.memo(function Sidebar() {
   return (
     <Container>
       <div className="top_links">
@@ -33,7 +33,7 @@ function Sidebar() {
       <Playlists />
     </Container>
   );
-}
+})
 
 const Container = styled.div`
   background-color: #000;
