@@ -1,15 +1,13 @@
-import styled from 'styled-components';
+import React from 'react';
 import axios from 'axios';
 
-import React, { useEffect } from 'react';
-
 import { useStateProvider } from '../utils/StateProvider.jsx';
-import reducerCases from '../utils/Constants';
+import reducerCases from '../utils/Constants.js';
 
-function CurrentTrack() {
+const CurrentTrack: React.FC = () => {
   const [{ token, currentlyPlaying }, dispatch] = useStateProvider();
 
-  useEffect(() => {
+  React.useEffect(() => {
     const getCurrentTrack = async () => {
       const response = await axios.get('https://api.spotify.com/v1/me/player/currently-playing', {
         headers: {
@@ -32,7 +30,7 @@ function CurrentTrack() {
   }, [token, dispatch]);
 
   return (
-    <Container>
+    <>
       {currentlyPlaying && (
         <div className="track">
           <div className="track_image">
@@ -44,32 +42,8 @@ function CurrentTrack() {
           </div>
         </div>
       )}
-    </Container>
+    </>
   );
-}
-
-const Container = styled.div`
-  .track {
-    display: flex;
-    align-items: center;
-    gap: 16px;
-    &_info {
-      display: flex;
-      flex-wrap: wrap;
-      position: relative;
-      gap: 5px;
-      h4 {
-        margin-bottom: 45px;
-        color: white;
-      }
-      p {
-        color: #b3b3b3;
-        font-size: 12px;
-        position: absolute;
-        top: 35px;
-      }
-    }
-  }
-`;
+};
 
 export default CurrentTrack;

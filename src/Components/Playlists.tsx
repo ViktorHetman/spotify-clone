@@ -1,13 +1,13 @@
-import React, { useEffect } from 'react';
+import React from 'react';
+import axios from 'axios';
+
 import { useStateProvider } from '../utils/StateProvider';
 
-import axios from 'axios';
 import reducerCases from '../utils/Constants';
-import styled from 'styled-components';
 
-function Playlists() {
+const Playlists: React.FC = () => {
   const [{ token, playlists }, dispatch] = useStateProvider();
-  useEffect(() => {
+  React.useEffect(() => {
     const getPlaylistData = async () => {
       const response = await axios.get('https://api.spotify.com/v1/me/playlists', {
         headers: {
@@ -29,7 +29,7 @@ function Playlists() {
   };
 
   return (
-    <Container>
+    <div className="playlists">
       <ul>
         {playlists.map(({ name, id }) => (
           <li key={id} onClick={() => changeCurrentPlaylist(id)}>
@@ -37,38 +37,8 @@ function Playlists() {
           </li>
         ))}
       </ul>
-    </Container>
+    </div>
   );
-}
-
-const Container = styled.div`
-  height: 100%;
-  overflow: hidden;
-  ul {
-    list-style-type: none;
-    display: flex;
-    flex-direction: column;
-    gap: 24px;
-    padding: 24px;
-    height: 55vh;
-    max-height: 100%;
-    overflow: auto;
-    &::-webkit-scrollbar {
-      width: 11px;
-      &-thumb {
-        background-color: rgba(255, 255, 255, 0.6);
-      }
-    }
-    li {
-      display: flex;
-      gap: 24px;
-      cursor: pointer;
-      transition: 0.3s ease-in-out;
-      &:hover {
-        color: white;
-      }
-    }
-  }
-`;
+};
 
 export default Playlists;

@@ -1,8 +1,6 @@
 import React from 'react';
 
-import styled from 'styled-components';
-
-export default function Login() {
+const Login: React.FC = () => {
   const handleClick = () => {
     const cliendId = 'aad67db467e943a1b4b7560bb070e6e9';
     const redirectUrl = 'http://localhost:3000/';
@@ -23,36 +21,14 @@ export default function Login() {
   };
 
   return (
-    <Container>
+    <div className="login">
       <img
         src="https://storage.googleapis.com/pr-newsroom-wp/1/2018/11/Spotify_Logo_CMYK_Black.png"
         alt="Spotify Logo"
       />
       <button onClick={handleClick}>Connect Spotify</button>
-    </Container>
+    </div>
   );
-}
+};
 
-const Container = styled.div`
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  height: 100vh;
-  width: 100vw;
-  background-color: #1db954;
-  gap: 80px;
-  img {
-    height: 20vh;
-  }
-  button {
-    padding: 24px 80px;
-    border-radius: 80px;
-    border: none;
-    background-color: #000;
-    color: #49f585;
-    font-size: 36px;
-    cursor: pointer;
-  }
-`;
-//62e3f84f9fa141d1ac886f90cca1aa0d
+export default Login;

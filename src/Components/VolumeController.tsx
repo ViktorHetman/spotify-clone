@@ -1,11 +1,10 @@
-import styled from 'styled-components';
+import React from 'react';
 import axios from 'axios';
 import { BsVolumeUp } from 'react-icons/bs';
 
-import React from 'react';
 import { useStateProvider } from '../utils/StateProvider.jsx';
 
-function VolumeController() {
+const VolumeController: React.FC = () => {
   const [{ token }] = useStateProvider();
   const setVolume = async (e) => {
     await axios.put(
@@ -24,7 +23,7 @@ function VolumeController() {
   };
 
   return (
-    <Container>
+    <div className="volume_contoller">
       <BsVolumeUp />
       <input
         type="range"
@@ -34,19 +33,8 @@ function VolumeController() {
           setVolume(e);
         }}
       />
-    </Container>
+    </div>
   );
-}
-
-const Container = styled.div`
-  display: flex;
-  color: white;
-  align-content: center;
-  input {
-    width: 240px;
-    border-radius: 32px;
-    heigth: 8px;
-  }
-`;
+};
 
 export default VolumeController;

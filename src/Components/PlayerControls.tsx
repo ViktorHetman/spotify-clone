@@ -1,14 +1,13 @@
-import styled from 'styled-components';
+import React from 'react';
+import axios from 'axios';
 import { BsFillPlayCircleFill, BsFillPauseCircleFill, BsShuffle } from 'react-icons/bs';
 import { CgPlayTrackNext, CgPlayTrackPrev } from 'react-icons/cg';
 import { FiRepeat } from 'react-icons/fi';
-import axios from 'axios';
 
-import React from 'react';
 import { useStateProvider } from '../utils/StateProvider.jsx';
-import reducerCases from '../utils/Constants';
+import reducerCases from '../utils/Constants.js';
 
-function PlayerControls() {
+const PlayerControls: React.FC = () => {
   const [{ token, playerState }, dispatch] = useStateProvider();
   const changeTrack = async (type) => {
     await axios.post(
@@ -56,7 +55,7 @@ function PlayerControls() {
   };
 
   return (
-    <Container>
+    <div className="player_controls">
       <div className="shuffle">
         <BsShuffle />
       </div>
@@ -76,32 +75,8 @@ function PlayerControls() {
       <div className="repeat">
         <FiRepeat />
       </div>
-    </Container>
+    </div>
   );
-}
-
-const Container = styled.div`
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 32px;
-  svg {
-    color: #b3b3b3;
-    transition: 0.2s ease-in-out;
-    &:hover {
-      color: white;
-    }
-  }
-  .state {
-    svg {
-      color: white;
-    }
-  }
-  .previous,
-  .next,
-  .state {
-    font-size: 32px;
-  }
-`;
+};
 
 export default PlayerControls;

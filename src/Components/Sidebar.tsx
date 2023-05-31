@@ -1,13 +1,12 @@
 import React from 'react';
-
-import styled from 'styled-components';
 import { IoLibrary } from 'react-icons/io5';
 import { MdHomeFilled, MdSearch } from 'react-icons/md';
+
 import Playlists from './Playlists';
 
-React.memo(function Sidebar() {
+const Sidebar: React.FC = () => {
   return (
-    <Container>
+    <div className="sidebar">
       <div className="top_links">
         <div className="logo">
           <img
@@ -31,45 +30,8 @@ React.memo(function Sidebar() {
         </ul>
       </div>
       <Playlists />
-    </Container>
+    </div>
   );
-})
-
-const Container = styled.div`
-  background-color: #000;
-  color: #b3b3b3;
-  display: flex;
-  flex-direction: column;
-  height: 100%;
-  width: 100%;
-  .top_links {
-    display: flex;
-    flex-direction: column;
-    .logo {
-      text-align: center;
-      margin: 24px 0;
-      img {
-        max-inline-size: 80%;
-        block-size: auto;
-      }
-    }
-    ul {
-      list-style-type: none;
-      display: flex;
-      flex-direction: column;
-      gap: 24px;
-      padding: 24px;
-      li {
-        display: flex;
-        gap: 24px;
-        cursor: pointer;
-        transition: 0.3s ease-in-out;
-        &:hover {
-          color: white;
-        }
-      }
-    }
-  }
-`;
+};
 
 export default Sidebar;

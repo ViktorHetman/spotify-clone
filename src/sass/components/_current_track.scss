@@ -1,0 +1,21 @@
+.track {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  &_info {
+    display: flex;
+    flex-wrap: wrap;
+    position: relative;
+    gap: 5px;
+    h4 {
+      margin-bottom: 45px;
+      color: white;
+    }
+    p {
+      color: #b3b3b3;
+      font-size: 12px;
+      position: absolute;
+      top: 35px;
+    }
+  }
+}
